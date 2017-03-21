@@ -34,4 +34,8 @@ obj.singleton_methods # => [:greet, :about]
 #   has a singleton class, then do singleton classes have
 #   singleton classes?
 # 
+#  Doesn't look like it
+
 #   How can you test your answer out?
+
+#   Tried calling singleton_methods on singleton_methods of a class and returned an empty array.
