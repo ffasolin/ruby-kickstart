@@ -15,16 +15,54 @@
 #        return self.date == other.date
 #      end
 
+require 'date'
 
+class User
+	attr_accessor :username, :date, :text, :blogs
+	def initialize (username)
+		self.username = username
+		self.blogs = []
+	end
+	def add_blog(date, text)
+    	added_blog = Blog.new(date, self, text)
+    	blogs << added_blog
+    	self.blogs = blogs.sort_by { |blog| blog.date }.reverse
+    	added_blog
+  	end
+end
+
+class Blog
+	attr_accessor :date, :user, :text
+	def initialize (date, user, text)
+		@date = date
+		@user = user
+		@text = text
+	end
+	def entry
+		return @user.username + " " + date.to_s + "\n" + text
+	end
+	def summary
+		new_array = text.split
+		if new_array.count <= 8
+			new_array[0..-1].join(" ")
+		else
+			new_array[0..9].join(" ")
+		end
+	end
+	def ==(other)
+		if (self.date == other.date) && (self.user == other.user) && (self.text == other.text)
+			self.entry == other.entry
+		end
+    end
+end
 
 # ==========  EXAMPLE  ==========
 #
-# lissa = User.new 'QTSort'
-# lissa.username                  # => "QTSort"
-# lissa.blogs                     # => []
-#
-# lissa.add_blog Date.parse("2010-05-28") , "Sailor Mars is my favourite"
-# lissa.blogs                     # => [ blog1 ]
+# p lissa = User.new("QTSort")
+# p lissa.username                  # => "QTSort"
+# p lissa.blogs   
+# p lissa.add_blog (Date.parse("2010-05-28") , "Sailor Mars is my favourite")
+# p lissa.blogs                     # => [ blog1 ]
 #
 # blog1 = lissa.blogs.first
 # blog1.user                      # => lissa
@@ -63,4 +101,4 @@
 
 # date docs are at: http://ruby-doc.org/core/classes/Date.html
 # don't spend too much time worrying about them :)
-require 'date'
+
