@@ -8,3 +8,14 @@
 # alternate_words("Lorem ipsum dolor sit amet.")  # => ["Lorem", "dolor", "amet"]
 # alternate_words("Can't we all get along?")      # => ["Can't", "all", "along"]
 # alternate_words("Elementary, my dear Watson!")  # => ["Elementary", "dear"]
+
+def alternate_words (string)
+	new_array = []
+	array = string.gsub(/[--]/,' ').gsub(/[!@$#%^&*()-=_+:;,.<>?|]/,'').split
+	array.length.times do |i|
+		if i.even?
+			new_array << array[i]
+		end
+	end
+	new_array
+end
