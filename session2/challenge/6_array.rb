@@ -14,3 +14,36 @@
 # prime_chars? ['ab', 'cd']       # => false
 # prime_chars? ['a', 'bcd']       # => false
 # prime_chars? ['a', 'b', 'cd']   # => false
+
+# require 'prime'
+
+# def prime_chars?(str)
+# str.join.length.prime?
+# end
+
+def prime_chars? (arr)
+	i = arr.join.length
+	if i < 2
+		return false
+	else
+		for n in 2..i-1
+   			return false if i % n == 0
+   			true
+   		end
+   	end
+end
+
+
+# myarray = ["a", "b", "chhhhhh", "dh", "g", "hhhh"]
+# p prime_chars? ["a", "b", "chhhhhh", "dh", "g", "hhhh"]
+# p prime_chars? ['abc']            # => true
+# p prime_chars? ['a', 'bc']        # => true
+# p prime_chars? ['ab', 'c']        # => true
+# p prime_chars? ['a', 'b', 'c', 'a', 'b', 'c', 'a', 'b', 'c', 'a', 'b', 'c', 'a', 'b', 'c', 'a', 'b', 'c', 'a', 'b', 'c', 'a', 'b', 'c', 'a', 'b', 'c']
+# p prime_chars? []
+# p prime_chars? [""]
+# p prime_chars? ["ab"]
+
+
+
+
