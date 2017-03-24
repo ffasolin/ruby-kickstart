@@ -38,19 +38,19 @@ def shared(a, b)
 		end
 	elsif a.empty?
 		for n in 0..b.length-1 do
-		hash1[b[n]] = [nil, true]
+			hash1[b[n]] = [nil, true]
 		end
 	else
-	for n in 0..a.length-1 do
-		hash1[a[n]] = [true, true] if b.include? a[n]
-		hash1[a[n]] = [true, nil] if !b.include? a[n]
-		hash1[b[n]] = [nil, true] if !a.include? b[n]
+		for n in 0..a.length-1 do
+			hash1[a[n]] = [true, true] if b.include? a[n]
+			hash1[a[n]] = [true, nil] if !b.include? a[n]
+			hash1[b[n]] = [nil, true] if !a.include? b[n]
+		end
 	end
-end
 	hash1.each do |key, value|
 		if value == [true, true]
-		arr << key
-	end
+			arr << key
+		end
 	end
 
 	final_arr = []
