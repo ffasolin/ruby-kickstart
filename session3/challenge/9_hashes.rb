@@ -29,4 +29,45 @@
 # shared [1,2,3], [3,2,1]            # => [{1=>[true, true], 2=>[true, true], 3=>[true, true]}, [1, 2, 3]]
 
 def shared(a, b)
+	hash1 = {}
+	arr = []
+
+	if b.empty?
+		for n in 0..a.length-1 do
+			hash1[a[n]] = [true, nil]
+		end
+	elsif a.empty?
+		for n in 0..b.length-1 do
+		hash1[b[n]] = [nil, true]
+		end
+	else
+	for n in 0..a.length-1 do
+		hash1[a[n]] = [true, true] if b.include? a[n]
+		hash1[a[n]] = [true, nil] if !b.include? a[n]
+		hash1[b[n]] = [nil, true] if !a.include? b[n]
+	end
 end
+	hash1.each do |key, value|
+		if value == [true, true]
+		arr << key
+	end
+	end
+
+	final_arr = []
+	hash1.tap { |key| key.delete(nil) } 
+	final_arr << hash1
+	final_arr << arr
+	final_arr
+end
+
+
+p shared [], []
+p shared [1,2,3], [1,2,4]            # => [{1=>[true, true], 2=>[true, true], 3=>[true, nil], 4=>[nil, true]}, [1, 2]]
+p shared %w(a b c d), %w(aa b cc d)  # => [{"a"=>[true, nil], "b"=>[true, true], "c"=>[true, nil], "d"=>[true, true], "aa"=>[nil, true], "cc"=>[nil, true]}, ["b", "d"]]
+p shared [], [1,2]                   # => [{1=>[nil, true], 2=>[nil, true]}, []]
+p shared [1,2], []                   # => [{1=>[true, nil], 2=>[true, nil]}, []]
+p shared [], []                      # => [{}, []]
+p shared [1,2,:c], ['a','b',:c]      # => [{1=>[true, nil], 2=>[true, nil], :c=>[true, true], "a"=>[nil, true], "b"=>[nil, true]}, [:c]]
+p shared [1,2,3], [3,2,1]
+
+
