@@ -30,5 +30,30 @@
 # end
 
 
-def array_init
+def array_init(para=5, &block)
+	arr = Array(0..para-1)
+	if block == nil
+		arr.map { |i| (i * 100).to_s }
+	else
+		arr.map(&block)
+	end
 end
+
+p array_init(2) { |i| i.to_s }    # => ['0', '1']
+p array_init { |i| i.to_s }       # => ['0', '1', '2', '3', '4']
+p array_init 2                    # => ['0', '100']
+p array_init                      # => ['0', '100', '200', '300', '400']
+p array_init { 'hi' }              # => ['hi', 'hi', 'hi', 'hi', 'hi']
+p array_init 10 do |i|            # => [0, -5, 400, -15, 800, -25, 1200, -35, 1600, -45]
+if i % 2 == 0
+    i * 200
+  else
+    i * -5
+  end
+end
+
+
+
+
+
+
