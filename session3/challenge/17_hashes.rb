@@ -7,3 +7,12 @@
 #
 # print_list_in_reverse head   # >> "1\n2\n"
 
+def print_list_in_reverse (hash1)
+	str = ""
+	for d in 1..hash1[:data] do
+		str << d.to_s + "\n"
+	end
+	print str
+end
+
+# same as previous one
