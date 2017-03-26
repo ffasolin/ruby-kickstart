@@ -15,4 +15,4 @@ def print_list_in_reverse (hash1)
 	print str
 end
 
-# same as previous one
+# same as previous one - should work without print
