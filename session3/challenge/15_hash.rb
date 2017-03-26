@@ -38,3 +38,19 @@
 # middle head                        # => 3
 # head = {:data => 6, :next => head}
 # middle head                        # => 3
+
+
+def middle (hash1)
+	h = hash1[:data]
+	if h < 3
+		1
+	elsif h % 2 == 0
+		h / 2
+	else
+		(h / 2).next
+	end
+end
+
+
+
+
