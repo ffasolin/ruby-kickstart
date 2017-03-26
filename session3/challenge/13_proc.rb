@@ -52,5 +52,22 @@
 #   end
 # end       # => ["a", "m", "r", 1, 3, 4, 9, 2.5, 9.0, 25.8]
 
-def your_sort
+def your_sort (arr, final_arr=[], &block)
+	if block == true
+		arr.map(&block)
+	elsif arr.length == 0
+		final_arr
+	else
+		arr.each { |i| final_arr << i if i == arr.min }
+		arr.delete(arr.min)
+		your_sort(arr, final_arr)
+	end
 end
+
+# p your_sort []
+# p your_sort [1]
+# p your_sort [2, 1]
+# p your_sort [5, 3]
+# p your_sort ["b", "a"]
+# p your_sort [3, 2, 1]
+# p your_sort [4, 3, 2, 1]
