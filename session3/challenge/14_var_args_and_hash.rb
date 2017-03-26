@@ -21,11 +21,50 @@
 # problem_14 2,   5, 6, 45, 99, 13, 5, 6,  :problem => :same_ends    # => true
 # problem_14 3,   5, 6, 45, 99, 13, 5, 6,  :problem => :same_ends    # => false
 
-def problem_14
+def problem_14(*arr)
+	problem = arr.pop[:problem] if arr.last.is_a? Hash
+    problem ||= :count_clumps
+	# problem = arr[:problem]
+	# if problem == :count_clumps
+	# 	return count_clumps(*arr)
+	# elsif problem == :same_ends
+	# 	return same_ends(*arr)
+	# end
+	return count_clumps(*arr) if problem == :count_clumps
+	return same_ends(*arr) if problem == :same_ends
 end
 
-def same_ends
+def same_ends(*nums)
+	n = nums[0]
+	if n == 0
+		if nums[n+1].to_s.split("").last.to_i == nums[-1].to_s.split("").last.to_i
+			true
+		else
+			false
+		end
+	else
+		if nums[n].to_s.split("").last.to_i == nums[-1].to_s.split("").last.to_i
+			true
+		else
+			false
+		end
+	end
 end
 
-def count_clumps
+def count_clumps(*array)
+	arr = array.chunk{|elem| elem}.map{|elem, i| [elem, i.length]}
+	clumpster = 0
+	arr2 = arr.map {|a, b| b}
+	0.upto (arr2.length - 1) do |i|
+		clumpster += 1 if arr2[i] > 1
+	end
+	clumpster
 end
+
+p count_clumps 1, 2, 2, 3, 4, 4
+p count_clumps 1, 1, 2, 1, 1
+p same_ends 1, 2, 2, 3, 4, 4
+p same_ends 1, 1, 2, 1, 1
+p same_ends 0, 1, 2, 5, 2, 1
+
+# Try to use ||=
