@@ -52,22 +52,34 @@
 #   end
 # end       # => ["a", "m", "r", 1, 3, 4, 9, 2.5, 9.0, 25.8]
 
-def your_sort (arr, final_arr=[], &block)
-	if block == true
-		arr.map(&block)
-	elsif arr.length == 0
-		final_arr
-	else
-		arr.each { |i| final_arr << i if i == arr.min }
-		arr.delete(arr.min)
-		your_sort(arr, final_arr)
+# def your_sort (arr, final_arr=[], &block)
+#   #   arr.each_index do |index2|
+#   #     order = block.call(arr[index1], arr[index2])
+#   #     arr[index1], arr[index2] = arr[index2], arr[index1] if order < 0
+# 	if arr.count == 0
+# 		final_arr
+# 	else
+# 		normal_sort(arr, final_arr)
+# 	end
+# end
+
+def your_sort(arr, &block)
+  block = block if block
+  block = lambda {|a, b| a <=> b} if !block
+    arr.length.times do
+      for n in 0..arr.length-2 do
+        if block.call(arr[n], arr[n+1]) > 0
+          arr[n], arr[n+1] = arr[n+1], arr[n]
+		end
+	  end
 	end
+	arr
 end
 
-# p your_sort []
-# p your_sort [1]
-# p your_sort [2, 1]
-# p your_sort [5, 3]
-# p your_sort ["b", "a"]
-# p your_sort [3, 2, 1]
-# p your_sort [4, 3, 2, 1]
+# your_sort []
+# your_sort [1]
+your_sort [2, 1]
+# your_sort [5, 3]
+your_sort ["b", "a"]
+# your_sort [3, 2, 1]
+your_sort [4, 3, 2, 1]
